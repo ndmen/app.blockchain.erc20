@@ -26,5 +26,15 @@ contract ERC20 is IERC20 {
         return true;
     }
 
-    
+    function transferFrom(
+        address sender, 
+        address recipient, 
+        uint amount
+    ) external returns (bool) {
+        allowance[sender][msg.sender] -= amount;
+        balanceOf[sender] -= amount;
+        balanceOf[recipient] += amount;
+        emit Transfer(sender, recipient, amount);
+        return true;
+    }
 }
