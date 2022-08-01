@@ -14,6 +14,11 @@ contract ERC20 is IERC20 {
     uint8 public decimals = 18;
 
     function transfer(address recipient, uint amount) external returns (bool) {
-        
+        balanceOf[msg.sender] -= amount;
+        balanceOf[recipient] += amount;
+        emit Transfer(msg.sender, recipient, amount);
+        return true;
     }
+
+    
 }
