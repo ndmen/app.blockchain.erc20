@@ -63,4 +63,14 @@ contract TokenSwap {
         _safeTransferFrom(token1, owner1, owner2, amount1);
         _safeTransferFrom(token2, owner2, owner1, amount2);
     }
+
+    function _safeTransferFrom(
+        IERC20 token,
+        address sender,
+        address recipient,
+        uint amount
+    ) private {
+        bool sent = token.transferFrom(sender, recipient, amount);
+        require(sent, "Token transfer failed");
+    }
 }
